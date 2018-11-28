@@ -9,7 +9,7 @@ __GPJDataDrivenTableView__ is a data-driven way to use UITableView. It is easy t
 ### CocoaPods
 
 ```ruby
-pod 'GPJDataDrivenTable'
+pod 'GPJDataDrivenTableView'
 ```
 
 ### Manual
