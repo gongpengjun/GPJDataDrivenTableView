@@ -6,7 +6,7 @@ Pod::Spec.new do |s|
   s.homepage     = "https://github.com/gongpengjun/GPJDataDrivenTableView"
   s.license      = { :type => 'MIT', :file => 'LICENSE' }
   s.author       = { "gongpengjun" => "frank.gongpengjun@gmail.com" }
-  s.platform     = :ios
+  s.platform     = :ios, '5.0' #minimum platform with ARC
   s.source       = { :git => "https://github.com/gongpengjun/GPJDataDrivenTableView.git", :tag => "v#{s.version}" }
   s.source_files = 'GPJDataDrivenTableView/**/*.{h,m}'
   s.framework    = "UIKit"
