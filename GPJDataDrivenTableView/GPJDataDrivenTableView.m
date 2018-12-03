@@ -106,8 +106,8 @@
 
 - (id)dataForIndexPath:(NSIndexPath *)indexPath;
 {
-    if(indexPath.row < self.dataArray.count)
-        return self.dataArray[indexPath.row];
+    if(0 <= indexPath.row && indexPath.row < self.dataArray.count)
+        return [self.dataArray objectAtIndex:indexPath.row];
     else
         return nil;
 }
