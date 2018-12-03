@@ -17,6 +17,10 @@ pod 'GPJDataDrivenTableView'
 1. download the GPJDataDrivenTableView repository
 2. copy the GPJDataDrivenTableView sub-folder into your Xcode project
 
+## Example
+
+[GPJDataDrivenTableViewExample](https://github.com/gongpengjun/GPJDataDrivenTableViewExample)
+
 ## Origin
 
 The traditional way is index-driven, we implement the UITableViewDataSource's or UITableViewDelegate's methods base on __indexPath__:
