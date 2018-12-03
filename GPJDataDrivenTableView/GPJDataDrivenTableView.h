@@ -6,24 +6,36 @@
 
 #import <UIKit/UIKit.h>
 
-@class GPJDataDrivenTableView;
-
 @interface GPJBaseData : NSObject
-@property (nonatomic, copy) void (^didSelectAction)(id data);
+@property (nonatomic, copy) void (^didSelectAction)(id data); // data is subclass of GPJBaseData
 - (CGFloat)cellHeight;
 @end
 
 @interface GPJBaseCell : UITableViewCell
-@property (nonatomic, strong) id data;
+@property (nonatomic, strong) id data; // data is subclass of GPJBaseData
 - (void)configCell;
 @end
 
-@interface GPJDataDrivenTableView : UIView <UITableViewDelegate, UITableViewDataSource>
+@interface GPJDataDrivenTableView : UITableView <UITableViewDelegate, UITableViewDataSource>
 
-@property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) NSArray     *dataArray;
+@property (nonatomic, strong) NSArray *dataArray;
 
-- (instancetype)initWithFrame:(CGRect)frame;
-- (void)reloadData;
+/* Initialize GPJDataDrivenTableView, do the following setup:
+ * 1. call [super initWithFrame:style:] with UITableViewStylePlain
+ * 2. set self.datasource to self
+ * 3. set self.delegate to self
+ */
+- (instancetype)initWithFrame:(CGRect)frame NS_DESIGNATED_INITIALIZER;
+
+// must specify style as UITableViewStylePlain
+- (instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style NS_DESIGNATED_INITIALIZER;
+
+- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
+
+/* Reloads everything from scratch. Redisplays visible rows.
+ * 1. GPJDataDrivenTableView.dataArray = dataArray;
+ * 2. [GPJDataDrivenTableView reloadData];
+ */
+- (void)reloadDataArray:(NSArray *)dataArray;
 
 @end

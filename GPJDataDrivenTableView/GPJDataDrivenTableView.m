@@ -47,33 +47,42 @@
 
 #pragma mark - Life Cycle
 
-- (void)dealloc;
-{
-    _tableView.delegate = nil;
-    _tableView.dataSource = nil;
-}
-
 - (instancetype)initWithFrame:(CGRect)frame;
 {
-    self = [super initWithFrame:frame];
+    self = [super initWithFrame:frame style:UITableViewStylePlain];
     if(self) {
-        self.tableView = [[UITableView alloc] initWithFrame:self.bounds style:UITableViewStylePlain];
-        [self addSubview:self.tableView];
-        self.tableView.delegate = self;
-        self.tableView.dataSource = self;
+        self.delegate = self; // The delegate is not retained.
+        self.dataSource = self; // The data source is not retained.
     }
     return self;
 }
 
-- (void)layoutSubviews;
+- (instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style;
 {
-    [super layoutSubviews];
-    self.tableView.frame = self.bounds;
+    NSAssert(UITableViewStylePlain == style, @"GPJDataDrivenTableView only support UITableViewStylePlain");
+    self = [super initWithFrame:frame style:style];
+    if(self) {
+        self.delegate = self; // The delegate is not retained.
+        self.dataSource = self; // The data source is not retained.
+    }
+    return self;
 }
 
-- (void)reloadData;
+- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder;
 {
-    [self.tableView reloadData];
+    self = [super initWithCoder:aDecoder];
+    if(self) {
+        NSAssert(UITableViewStylePlain == self.style, @"GPJDataDrivenTableView only support UITableViewStylePlain");
+        self.delegate = self; // The delegate is not retained.
+        self.dataSource = self; // The data source is not retained.
+    }
+    return self;
+}
+
+- (void)reloadDataArray:(NSArray *)dataArray;
+{
+    self.dataArray = dataArray;
+    [self reloadData];
 }
 
 #pragma mark - Data to Cell Mapping
@@ -148,7 +157,7 @@
 {
     NSString *reuseIdentifier = [self reuseIdentifierForIndexPath:indexPath];
     Class     cellClass       = [self cellClassForIndexPath:indexPath];
-    GPJBaseCell *cell = [_tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
+    GPJBaseCell *cell = [self dequeueReusableCellWithIdentifier:reuseIdentifier];
     if (cell == nil) {
         cell = [[cellClass alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
     }
