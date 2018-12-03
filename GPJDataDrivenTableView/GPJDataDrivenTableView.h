@@ -8,7 +8,7 @@
 
 @class GPJDataDrivenTableView;
 
-typedef void (^DGCBaseTableConfigTableViewBlock)(GPJDataDrivenTableView *tableContainerView, UITableView *tableView);
+typedef void (^GPJTableViewConfigBlock)(GPJDataDrivenTableView *tableContainerView, UITableView *tableView);
 
 @interface GPJBaseData : NSObject
 @property (nonatomic, copy) void (^didSelectAction)(id data);
@@ -26,7 +26,7 @@ typedef void (^DGCBaseTableConfigTableViewBlock)(GPJDataDrivenTableView *tableCo
 @property (nonatomic, strong) NSArray     *dataArray;
 
 - (instancetype)initWithFrame:(CGRect)frame;
-- (instancetype)initWithFrame:(CGRect)frame configTableViewBlock:(DGCBaseTableConfigTableViewBlock)configTableViewBlock;
+- (instancetype)initWithFrame:(CGRect)frame configTableViewBlock:(GPJTableViewConfigBlock)configTableViewBlock;
 - (void)reloadData;
 
 @end

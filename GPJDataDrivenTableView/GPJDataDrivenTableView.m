@@ -69,7 +69,7 @@
     return [self initWithFrame:frame configTableViewBlock:nil];
 }
 
-- (instancetype)initWithFrame:(CGRect)frame configTableViewBlock:(DGCBaseTableConfigTableViewBlock)configTableViewBlock;
+- (instancetype)initWithFrame:(CGRect)frame configTableViewBlock:(GPJTableViewConfigBlock)configTableViewBlock;
 {
     self = [super initWithFrame:frame];
     if(self) {
