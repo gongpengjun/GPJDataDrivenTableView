@@ -5,6 +5,7 @@
 //
 
 #import "GPJDataDrivenTableView.h"
+#import <objc/runtime.h>
 
 #define kDefaultCellHeight 44.0f
 
@@ -45,8 +46,7 @@
 
 @implementation GPJDataDrivenTableView
 
-@dynamic dataSource;
-@dynamic delegate;
+@dynamic dataSource, delegate;
 
 #pragma mark - Life Cycle
 
@@ -155,7 +155,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    if ([self.gpjDelegate respondsToSelector:@selector(tableView:didSelectRowAtIndexPath:)]) {
+        [self.gpjDelegate tableView:tableView didSelectRowAtIndexPath:indexPath];
+    }
+    
     id data = [self dataForIndexPath:indexPath];
     if (![data isKindOfClass:[GPJBaseData class]])
         return;
@@ -163,6 +166,83 @@
     if (baseData.didSelectAction) {
         baseData.didSelectAction(data);
     }
+}
+
+@end
+
+#pragma mark -
+
+@implementation GPJDataDrivenTableView (MessageForward)
+
+- (void)setGpjDataSource:(id<UITableViewDataSource>)gpjDataSource
+{
+    _gpjDataSource = gpjDataSource;
+    // force UITableView to re-query dataSource's methods
+    super.dataSource = nil; super.dataSource = self;
+}
+
+- (void)setGpjDelegate:(id<UITableViewDelegate>)gpjDelegate
+{
+    _gpjDelegate = gpjDelegate;
+    // force UITableView to re-query delegate's methods
+    super.delegate = nil; super.delegate = self;
+}
+
+- (BOOL)shouldForwardSelectorToDataSource:(SEL)aSelector
+{
+    // Only forward the selector to gpjDataSource if it's part of the UITableViewDataSource protocol.
+    struct objc_method_description description = protocol_getMethodDescription(@protocol(UITableViewDataSource), aSelector, NO, YES);
+    BOOL isSelectorInTableViewDataSource = (description.name != NULL && description.types != NULL);
+    BOOL shouldForword = (isSelectorInTableViewDataSource && [self.gpjDataSource respondsToSelector:aSelector]);
+    return shouldForword;
+}
+
+- (BOOL)shouldForwardSelectorToDelegate:(SEL)aSelector
+{
+    // Only forward the selector to gpjDelegate if it's part of the UITableViewDelegate protocol.
+    struct objc_method_description description = protocol_getMethodDescription(@protocol(UITableViewDelegate), aSelector, NO, YES);
+    BOOL isSelectorInTableViewDelegate = (description.name != NULL && description.types != NULL);
+    BOOL shouldForword = (isSelectorInTableViewDelegate && [self.gpjDelegate respondsToSelector:aSelector]);
+    return shouldForword;
+}
+
+- (BOOL)respondsToSelector:(SEL)aSelector
+{
+    if ([self shouldForwardSelectorToDataSource:aSelector]) {
+        return YES;
+    }
+    
+    if ([self shouldForwardSelectorToDelegate:aSelector]) {
+        return YES;
+    }
+
+    return [super respondsToSelector:aSelector];
+}
+
+- (BOOL)conformsToProtocol:(Protocol *)aProtocol
+{
+    if ([NSStringFromProtocol(aProtocol) isEqualToString:@"UITableViewDataSource"]) {
+        return YES;
+    }
+    
+    if ([NSStringFromProtocol(aProtocol) isEqualToString:@"UITableViewDelegate"]) {
+        return YES;
+    }
+    
+    return [super conformsToProtocol:aProtocol];
+}
+
+- (id)forwardingTargetForSelector:(SEL)aSelector
+{
+    if ([self shouldForwardSelectorToDataSource:aSelector]) {
+        return self.gpjDataSource;
+    }
+    
+    if ([self shouldForwardSelectorToDelegate:aSelector]) {
+        return self.gpjDelegate;
+    }
+
+    return [super forwardingTargetForSelector:aSelector];
 }
 
 @end

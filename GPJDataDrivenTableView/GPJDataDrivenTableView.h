@@ -34,14 +34,24 @@
 - (void)reloadDataArray:(NSArray *)dataArray;
 
 /* Use `dataArray` to get the data-driven-cell feature of GPJDataDrivenTableView
- * DO NOT assign `dataSource` or `delegate`
- * since GPJDataDrivenTableView will assign `self` as `dataSource` and `delegate`
+ * DO NOT assign `dataSource` or `delegate`, Use `gpjDataSource` and `gpjDelegate` instead
+ * GPJDataDrivenTableView will assign `self` as `dataSource` and `delegate`
  */
-@property (nonatomic, weak, nullable) id <UITableViewDataSource> dataSource NS_UNAVAILABLE;
-@property (nonatomic, weak, nullable) id <UITableViewDelegate> delegate NS_UNAVAILABLE;
+@property (nonatomic, weak, nullable) id <UITableViewDataSource> dataSource NS_UNAVAILABLE; // use gpjDataSource
+@property (nonatomic, weak, nullable) id <UITableViewDelegate> delegate NS_UNAVAILABLE; // use gpjDelegate
+
+@property (nonatomic, weak, nullable) id <UITableViewDataSource> gpjDataSource;
+@property (nonatomic, weak, nullable) id <UITableViewDelegate>   gpjDelegate;
 
 // DO ONT use the following initializers, since GPJDataDrivenTableView always use `UITableViewStylePlain`
 - (instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style NS_UNAVAILABLE;
 - (nullable instancetype)initWithCoder:(NSCoder *)aDecoder NS_UNAVAILABLE;
 
+@end
+
+@interface GPJDataDrivenTableView (DataCellMapping)
+- (id)dataForIndexPath:(NSIndexPath *)indexPath;
+- (Class)cellClassForIndexPath:(NSIndexPath *)indexPath;
+- (CGFloat)heightForIndexPath:(NSIndexPath *)indexPath;
+- (Class)cellClassForDataClass:(Class)dataClass;
 @end
