@@ -22,20 +22,26 @@
 
 /* Initialize GPJDataDrivenTableView, do the following setup:
  * 1. call [super initWithFrame:style:] with UITableViewStylePlain
- * 2. set self.datasource to self
- * 3. set self.delegate to self
+ * 2. set `self` as `super.datasource`
+ * 3. set `self` as `super.delegate`
  */
 - (instancetype)initWithFrame:(CGRect)frame NS_DESIGNATED_INITIALIZER;
 
-// must specify style as UITableViewStylePlain
-- (instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style NS_DESIGNATED_INITIALIZER;
-
-- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
-
 /* Reloads everything from scratch. Redisplays visible rows.
- * 1. GPJDataDrivenTableView.dataArray = dataArray;
- * 2. [GPJDataDrivenTableView reloadData];
+ * 1. self.dataArray = dataArray;
+ * 2. [super reloadData];
  */
 - (void)reloadDataArray:(NSArray *)dataArray;
+
+/* Use `dataArray` to get the data-driven-cell feature of GPJDataDrivenTableView
+ * DO NOT assign `dataSource` or `delegate`
+ * since GPJDataDrivenTableView will assign `self` as `dataSource` and `delegate`
+ */
+@property (nonatomic, weak, nullable) id <UITableViewDataSource> dataSource NS_UNAVAILABLE;
+@property (nonatomic, weak, nullable) id <UITableViewDelegate> delegate NS_UNAVAILABLE;
+
+// DO ONT use the following initializers, since GPJDataDrivenTableView always use `UITableViewStylePlain`
+- (instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style NS_UNAVAILABLE;
+- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder NS_UNAVAILABLE;
 
 @end

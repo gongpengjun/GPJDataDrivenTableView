@@ -45,36 +45,17 @@
 
 @implementation GPJDataDrivenTableView
 
+@dynamic dataSource;
+@dynamic delegate;
+
 #pragma mark - Life Cycle
 
 - (instancetype)initWithFrame:(CGRect)frame;
 {
     self = [super initWithFrame:frame style:UITableViewStylePlain];
     if(self) {
-        self.delegate = self; // The delegate is not retained.
-        self.dataSource = self; // The data source is not retained.
-    }
-    return self;
-}
-
-- (instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style;
-{
-    NSAssert(UITableViewStylePlain == style, @"GPJDataDrivenTableView only support UITableViewStylePlain");
-    self = [super initWithFrame:frame style:style];
-    if(self) {
-        self.delegate = self; // The delegate is not retained.
-        self.dataSource = self; // The data source is not retained.
-    }
-    return self;
-}
-
-- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder;
-{
-    self = [super initWithCoder:aDecoder];
-    if(self) {
-        NSAssert(UITableViewStylePlain == self.style, @"GPJDataDrivenTableView only support UITableViewStylePlain");
-        self.delegate = self; // The delegate is not retained.
-        self.dataSource = self; // The data source is not retained.
+        super.delegate = self; // The delegate is not retained.
+        super.dataSource = self; // The data source is not retained.
     }
     return self;
 }
@@ -82,7 +63,7 @@
 - (void)reloadDataArray:(NSArray *)dataArray;
 {
     self.dataArray = dataArray;
-    [self reloadData];
+    [super reloadData];
 }
 
 #pragma mark - Data to Cell Mapping
@@ -92,12 +73,12 @@
     return 1;
 }
 
-- (NSInteger)rowCountInSection:(NSInteger)section;
+- (NSInteger)rowCountInSection:(NSInteger)section
 {
     return self.dataArray.count;
 }
 
-- (id)dataForIndexPath:(NSIndexPath *)indexPath;
+- (id)dataForIndexPath:(NSIndexPath *)indexPath
 {
     if(0 <= indexPath.row && indexPath.row < self.dataArray.count)
         return [self.dataArray objectAtIndex:indexPath.row];
@@ -105,19 +86,19 @@
         return nil;
 }
 
-- (Class)cellClassForIndexPath:(NSIndexPath *)indexPath;
+- (Class)cellClassForIndexPath:(NSIndexPath *)indexPath
 {
     id data = [self dataForIndexPath:indexPath];
     Class cellClass = [self cellClassForDataClass:[data class]];
     return cellClass;
 }
 
-- (NSString *)reuseIdentifierForIndexPath:(NSIndexPath *)indexPath;
+- (NSString *)reuseIdentifierForIndexPath:(NSIndexPath *)indexPath
 {
     return [[self cellClassForIndexPath:indexPath] GPJReuseIdentifier];
 }
 
-- (CGFloat)heightForIndexPath:(NSIndexPath *)indexPath;
+- (CGFloat)heightForIndexPath:(NSIndexPath *)indexPath
 {
     id data  = [self dataForIndexPath:indexPath];
     if ([data isKindOfClass:[GPJBaseData class]]) {
@@ -129,7 +110,7 @@
 
 #pragma mark - Data -> Cell name mapping
 
-- (Class)cellClassForDataClass:(Class)dataClass;
+- (Class)cellClassForDataClass:(Class)dataClass
 {
     NSString *dataClassName = NSStringFromClass(dataClass);
     NSString *cellClassName = nil;
@@ -167,13 +148,14 @@
 
 #pragma mark - UITableViewDelegate
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return [self heightForIndexPath:indexPath];
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
     id data = [self dataForIndexPath:indexPath];
     if (![data isKindOfClass:[GPJBaseData class]])
         return;
