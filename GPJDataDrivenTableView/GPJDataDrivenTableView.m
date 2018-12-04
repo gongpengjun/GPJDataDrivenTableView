@@ -5,7 +5,6 @@
 //
 
 #import "GPJDataDrivenTableView.h"
-#import <Masonry/Masonry.h>
 
 #define kDefaultCellHeight 44.0f
 
@@ -66,25 +65,20 @@
 
 - (instancetype)initWithFrame:(CGRect)frame;
 {
-    return [self initWithFrame:frame configTableViewBlock:nil];
-}
-
-- (instancetype)initWithFrame:(CGRect)frame configTableViewBlock:(GPJTableViewConfigBlock)configTableViewBlock;
-{
     self = [super initWithFrame:frame];
     if(self) {
         self.tableView = [[UITableView alloc] initWithFrame:self.bounds style:UITableViewStylePlain];
-        [self insertSubview:self.tableView atIndex:0];
-        [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.edges.equalTo(self);
-        }];
-        if (configTableViewBlock) {
-            configTableViewBlock(self, self.tableView);
-        }
+        [self addSubview:self.tableView];
         self.tableView.delegate = self;
         self.tableView.dataSource = self;
     }
     return self;
+}
+
+- (void)layoutSubviews;
+{
+    [super layoutSubviews];
+    self.tableView.frame = self.bounds;
 }
 
 - (void)reloadData;

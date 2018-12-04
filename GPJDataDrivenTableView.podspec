@@ -12,5 +12,4 @@ Pod::Spec.new do |s|
   s.source_files = 'GPJDataDrivenTableView/**/*.{h,m}'
   s.framework    = "UIKit"
   s.requires_arc = true
-  s.dependency 'Masonry'
 end

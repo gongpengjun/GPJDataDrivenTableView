@@ -8,8 +8,6 @@
 
 @class GPJDataDrivenTableView;
 
-typedef void (^GPJTableViewConfigBlock)(GPJDataDrivenTableView *tableContainerView, UITableView *tableView);
-
 @interface GPJBaseData : NSObject
 @property (nonatomic, copy) void (^didSelectAction)(id data);
 - (CGFloat)cellHeight;
@@ -26,7 +24,6 @@ typedef void (^GPJTableViewConfigBlock)(GPJDataDrivenTableView *tableContainerVi
 @property (nonatomic, strong) NSArray     *dataArray;
 
 - (instancetype)initWithFrame:(CGRect)frame;
-- (instancetype)initWithFrame:(CGRect)frame configTableViewBlock:(GPJTableViewConfigBlock)configTableViewBlock;
 - (void)reloadData;
 
 @end
