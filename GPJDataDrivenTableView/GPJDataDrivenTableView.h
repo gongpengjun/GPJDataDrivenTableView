@@ -6,8 +6,6 @@
 
 #import <UIKit/UIKit.h>
 
-@class GPJDataDrivenTableView;
-
 @interface GPJBaseData : NSObject
 @property (nonatomic, copy) void (^didSelectAction)(id data);
 - (CGFloat)cellHeight;
