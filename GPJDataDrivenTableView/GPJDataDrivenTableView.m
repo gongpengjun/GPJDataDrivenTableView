@@ -25,16 +25,6 @@
 
 @implementation GPJBaseCell
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
-{
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if(self) {
-        self.selectionStyle = UITableViewCellSelectionStyleNone;
-        self.clipsToBounds = YES;
-    }
-    return self;
-}
-
 + (NSString *)GPJReuseIdentifier;
 {
     return NSStringFromClass([self class]);
