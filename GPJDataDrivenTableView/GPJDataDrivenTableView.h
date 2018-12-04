@@ -25,5 +25,6 @@
 
 - (instancetype)initWithFrame:(CGRect)frame;
 - (void)reloadData;
+- (void)reloadDataArray:(NSArray *)dataArray;
 
 @end

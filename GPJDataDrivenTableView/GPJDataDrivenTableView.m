@@ -76,6 +76,12 @@
     [self.tableView reloadData];
 }
 
+- (void)reloadDataArray:(NSArray *)dataArray;
+{
+    self.dataArray = dataArray;
+    [self.tableView reloadData];
+}
+
 #pragma mark - Data to Cell Mapping
 
 - (NSInteger)sectionCount
