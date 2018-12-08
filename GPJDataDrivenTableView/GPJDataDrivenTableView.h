@@ -18,6 +18,9 @@
 
 @interface GPJDataDrivenTableView : UIView <UITableViewDelegate, UITableViewDataSource>
 
+@property (nonatomic, weak, nullable) id <UITableViewDataSource> dataSource;
+@property (nonatomic, weak, nullable) id <UITableViewDelegate> delegate;
+
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSArray     *dataArray;
 

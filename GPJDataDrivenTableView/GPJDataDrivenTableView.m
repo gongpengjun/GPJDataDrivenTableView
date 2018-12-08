@@ -5,6 +5,7 @@
 //
 
 #import "GPJDataDrivenTableView.h"
+#import <objc/runtime.h>
 
 #define kDefaultCellHeight 44.0f
 
@@ -177,6 +178,83 @@
     if (baseData.didSelectAction) {
         baseData.didSelectAction(data);
     }
+}
+
+@end
+
+#pragma mark -
+
+@implementation GPJDataDrivenTableView (MessageForward)
+
+- (void)setDataSource:(id<UITableViewDataSource>)dataSource
+{
+    _dataSource = dataSource;
+    // force UITableView to re-query dataSource's methods
+    self.tableView.dataSource = nil; self.tableView.dataSource = self;
+}
+
+- (void)setDelegate:(id<UITableViewDelegate>)delegate
+{
+    _delegate = delegate;
+    // force UITableView to re-query delegate's methods
+    self.tableView.delegate = nil; self.tableView.delegate = self;
+}
+
+- (BOOL)shouldForwardSelectorToDataSource:(SEL)aSelector
+{
+    // Only forward the selector to dataSource if it's part of the UITableViewDataSource protocol.
+    struct objc_method_description description = protocol_getMethodDescription(@protocol(UITableViewDataSource), aSelector, NO, YES);
+    BOOL isSelectorInTableViewDataSource = (description.name != NULL && description.types != NULL);
+    BOOL shouldForword = (isSelectorInTableViewDataSource && [self.dataSource respondsToSelector:aSelector]);
+    return shouldForword;
+}
+
+- (BOOL)shouldForwardSelectorToDelegate:(SEL)aSelector
+{
+    // Only forward the selector to delegate if it's part of the UITableViewDelegate protocol.
+    struct objc_method_description description = protocol_getMethodDescription(@protocol(UITableViewDelegate), aSelector, NO, YES);
+    BOOL isSelectorInTableViewDelegate = (description.name != NULL && description.types != NULL);
+    BOOL shouldForword = (isSelectorInTableViewDelegate && [self.delegate respondsToSelector:aSelector]);
+    return shouldForword;
+}
+
+- (BOOL)respondsToSelector:(SEL)aSelector
+{
+    if ([self shouldForwardSelectorToDataSource:aSelector]) {
+        return YES;
+    }
+    
+    if ([self shouldForwardSelectorToDelegate:aSelector]) {
+        return YES;
+    }
+    
+    return [super respondsToSelector:aSelector];
+}
+
+- (BOOL)conformsToProtocol:(Protocol *)aProtocol
+{
+    if ([NSStringFromProtocol(aProtocol) isEqualToString:@"UITableViewDataSource"]) {
+        return YES;
+    }
+    
+    if ([NSStringFromProtocol(aProtocol) isEqualToString:@"UITableViewDelegate"]) {
+        return YES;
+    }
+    
+    return [super conformsToProtocol:aProtocol];
+}
+
+- (id)forwardingTargetForSelector:(SEL)aSelector
+{
+    if ([self shouldForwardSelectorToDataSource:aSelector]) {
+        return self.dataSource;
+    }
+    
+    if ([self shouldForwardSelectorToDelegate:aSelector]) {
+        return self.delegate;
+    }
+    
+    return [super forwardingTargetForSelector:aSelector];
 }
 
 @end
