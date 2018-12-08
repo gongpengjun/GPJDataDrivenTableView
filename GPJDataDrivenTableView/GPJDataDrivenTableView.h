@@ -29,3 +29,10 @@
 - (void)reloadDataArray:(NSArray *)dataArray;
 
 @end
+
+@interface GPJDataDrivenTableView (DataCellMapping)
+- (id)dataForIndexPath:(NSIndexPath *)indexPath;
+- (Class)cellClassForIndexPath:(NSIndexPath *)indexPath;
+- (CGFloat)heightForIndexPath:(NSIndexPath *)indexPath;
+- (Class)cellClassForDataClass:(Class)dataClass;
+@end

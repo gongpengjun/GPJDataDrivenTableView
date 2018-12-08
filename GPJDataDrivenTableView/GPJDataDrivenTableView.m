@@ -46,6 +46,20 @@
 
 @implementation GPJDataDrivenTableView
 
+- (void)setDataSource:(id<UITableViewDataSource>)dataSource
+{
+    _dataSource = dataSource;
+    // force UITableView to re-query dataSource's methods
+    self.tableView.dataSource = nil; self.tableView.dataSource = self;
+}
+
+- (void)setDelegate:(id<UITableViewDelegate>)delegate
+{
+    _delegate = delegate;
+    // force UITableView to re-query delegate's methods
+    self.tableView.delegate = nil; self.tableView.delegate = self;
+}
+
 #pragma mark - Life Cycle
 
 - (void)dealloc;
@@ -185,20 +199,6 @@
 #pragma mark -
 
 @implementation GPJDataDrivenTableView (MessageForward)
-
-- (void)setDataSource:(id<UITableViewDataSource>)dataSource
-{
-    _dataSource = dataSource;
-    // force UITableView to re-query dataSource's methods
-    self.tableView.dataSource = nil; self.tableView.dataSource = self;
-}
-
-- (void)setDelegate:(id<UITableViewDelegate>)delegate
-{
-    _delegate = delegate;
-    // force UITableView to re-query delegate's methods
-    self.tableView.delegate = nil; self.tableView.delegate = self;
-}
 
 - (BOOL)shouldForwardSelectorToDataSource:(SEL)aSelector
 {
