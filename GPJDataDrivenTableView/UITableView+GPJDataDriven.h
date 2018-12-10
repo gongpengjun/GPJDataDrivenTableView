@@ -22,8 +22,8 @@
 
 /* Initialize UITableView(GPJDataDriven), do the following setup:
  * 1. call [self initWithFrame:style:] with UITableViewStylePlain
- * 2. set `self` as `super.datasource`
- * 3. set `self` as `super.delegate`
+ * 2. set `self` as `self.datasource`
+ * 3. set `self` as `self.delegate`
  */
 - (instancetype)initWithFrame:(CGRect)frame;
 
