@@ -1,10 +1,10 @@
 //
-//  GPJDataDrivenTableView.m
+//  UITableView+GPJDataDriven.m
 //
 //  Created by gongpengjun <frank.gongpengjun@gmail.com>
 //
 
-#import "GPJDataDrivenTableView.h"
+#import "UITableView+GPJDataDriven.h"
 #import <objc/runtime.h>
 
 #define kDefaultCellHeight 44.0f
@@ -44,18 +44,54 @@
 
 @end
 
-@implementation GPJDataDrivenTableView
+static const void *kDataArray     = &kDataArray;
+static const void *kGpjDataSource = &kGpjDataSource;
+static const void *kGpjDelegate   = &kGpjDelegate;
 
-@dynamic dataSource, delegate;
+@implementation UITableView (GPJDataDriven)
+
+- (void)setDataArray:(NSArray *)dataArray
+{
+    objc_setAssociatedObject(self, kDataArray, dataArray, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (NSArray *)dataArray
+{
+    return objc_getAssociatedObject(self, kDataArray);
+}
+
+- (void)setGpjDataSource:(id<UITableViewDataSource>)gpjDataSource
+{
+    objc_setAssociatedObject(self, kGpjDataSource, gpjDataSource, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    // force UITableView to re-query dataSource's methods
+    self.dataSource = nil; self.dataSource = self;
+}
+
+- (id<UITableViewDataSource>)gpjDataSource
+{
+    return objc_getAssociatedObject(self, kGpjDataSource);
+}
+
+- (void)setGpjDelegate:(id<UITableViewDelegate>)gpjDelegate
+{
+    objc_setAssociatedObject(self, kGpjDelegate, gpjDelegate, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    // force UITableView to re-query delegate's methods
+    self.delegate = nil; self.delegate = self;
+}
+
+- (id<UITableViewDelegate>)gpjDelegate
+{
+    return objc_getAssociatedObject(self, kGpjDelegate);
+}
 
 #pragma mark - Life Cycle
 
 - (instancetype)initWithFrame:(CGRect)frame;
 {
-    self = [super initWithFrame:frame style:UITableViewStylePlain];
+    self = [self initWithFrame:frame style:UITableViewStylePlain];
     if(self) {
-        super.delegate = self; // The delegate is not retained.
-        super.dataSource = self; // The data source is not retained.
+        self.delegate = self; // The delegate is not retained.
+        self.dataSource = self; // The data source is not retained.
     }
     return self;
 }
@@ -63,7 +99,7 @@
 - (void)reloadDataArray:(NSArray *)dataArray;
 {
     self.dataArray = dataArray;
-    [super reloadData];
+    [self reloadData];
 }
 
 #pragma mark - Data to Cell Mapping
@@ -172,21 +208,7 @@
 
 #pragma mark -
 
-@implementation GPJDataDrivenTableView (MessageForward)
-
-- (void)setGpjDataSource:(id<UITableViewDataSource>)gpjDataSource
-{
-    _gpjDataSource = gpjDataSource;
-    // force UITableView to re-query dataSource's methods
-    super.dataSource = nil; super.dataSource = self;
-}
-
-- (void)setGpjDelegate:(id<UITableViewDelegate>)gpjDelegate
-{
-    _gpjDelegate = gpjDelegate;
-    // force UITableView to re-query delegate's methods
-    super.delegate = nil; super.delegate = self;
-}
+@implementation UITableView (GPJMessageForward)
 
 - (BOOL)shouldForwardSelectorToDataSource:(SEL)aSelector
 {
