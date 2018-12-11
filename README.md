@@ -4,6 +4,17 @@
 
 __GPJDataDrivenTableView__ is a data-driven way to use UITableView. It is easy to use. It is friendly to evolve with change of requirements.
 
+`GPJDataDrivenTableView` has the following benefits:
+
+- the interface is intuitive, easy to use
+  * just call `-[GPJDataDrivenTableView reloadDataArray:]`
+- two-way data mapping (Binding)
+  * mapping from XXXData to XXXCell based on class name
+  * send action from XXXCell to XXXData through `GPJBaseData.didSelectAction` block
+- decouple code by cell type, gain fine granularity code decouple
+  * XXXData and XXXCell resides in XXXData.h/.m
+  * YYYData and YYYCell resides in YYYData.h/.m
+
 ## Installation
 
 ### CocoaPods
@@ -80,7 +91,7 @@ This index-driven way based on __indexPath__ results a lot of `if-else` code seg
 
 [![uitableview_indexdriven](https://user-images.githubusercontent.com/278430/49796885-dc604680-fd78-11e8-9e4f-90fbf842c680.png)](docs/UITableView_IndexDriven.png)
 
-The core role of data-driven way to use UITableView is GPJDataDrivenTableView class. GPJDataDrivenTableView is subclass of UITableView, it has a `dataArray` property, GPJDataDrivenTableView set itself as UITableView's dataSource and delegate, implement the protocol methods, and covert ___indexPath___ to ___data___ in dataArray. Finally we can render cell ui and respond to row selection based on ___data___. 
+The core role of data-driven way to use UITableView is GPJDataDrivenTableView class. GPJDataDrivenTableView is subclass of UITableView, it has a `dataArray` property, GPJDataDrivenTableView set itself as UITableView's dataSource and delegate, implement the protocol methods, and mapping `indexPath` to `data` in its `dataArray` property. Finally we can get the cell ui and respond to row selection based on ___data___. 
 
 [![uitableview_datadriven](https://user-images.githubusercontent.com/278430/49796884-dbc7b000-fd78-11e8-80da-604e2796673f.png)](docs/UITableView_DataDriven.png)
 
