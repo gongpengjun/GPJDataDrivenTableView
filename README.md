@@ -2,7 +2,7 @@
 
 ## Description
 
-__GPJDataDrivenTableView__ is a data-driven way to use UITableView. It is easy to use. It is friendly to evolve with change of requirements.
+__GPJDataDrivenTableView__ is a data-driven way to use UITableView.
 
 `GPJDataDrivenTableView` has the following benefits:
 
@@ -14,6 +14,8 @@ __GPJDataDrivenTableView__ is a data-driven way to use UITableView. It is easy t
 - decouple code by cell type, gain fine granularity code decouple
   * XXXData and XXXCell resides in XXXData.h/.m
   * YYYData and YYYCell resides in YYYData.h/.m
+
+`GPJDataDrivenTableView` is friendly to evolve with change of requirements.
 
 ## Installation
 
