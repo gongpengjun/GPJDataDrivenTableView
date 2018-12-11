@@ -18,6 +18,7 @@ UITableView *dataDrivenTableView = [[UITableView alloc] initWithFrame:self.view.
 dataDrivenTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 dataDrivenTableView.gpjDataSource = self;
 dataDrivenTableView.gpjDelegate = self;
+[self.view addSubview:dataDrivenTableView];
 
 NSMutableArray *dataArray = [NSMutableArray array];
 for (UIColor *color in self.colorsArray)
