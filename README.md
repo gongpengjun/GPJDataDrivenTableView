@@ -24,6 +24,7 @@ pod 'GPJDataDrivenTableView'
 
 GPJDataDrivenTableView *dataDrivenTableView = [[GPJDataDrivenTableView alloc] initWithFrame:self.view.bounds];
 dataDrivenTableView.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+[self.view addSubview:dataDrivenTableView];
 
 NSMutableArray *dataArray = [NSMutableArray array];
 {

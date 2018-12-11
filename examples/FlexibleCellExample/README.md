@@ -16,6 +16,7 @@ iOS Example App to demonstrate flexible various cells using GPJDataDrivenTableVi
 
 GPJDataDrivenTableView *dataDrivenTableView = [[GPJDataDrivenTableView alloc] initWithFrame:self.view.bounds];
 dataDrivenTableView.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+[self.view addSubview:dataDrivenTableView];
 
 NSMutableArray *dataArray = [NSMutableArray array];
 {

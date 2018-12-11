@@ -13,6 +13,7 @@ iOS Example App to demonstrate basic usage of GPJDataDrivenTableView.
 
 GPJDataDrivenTableView *dataDrivenTableView = [[GPJDataDrivenTableView alloc] initWithFrame:self.view.bounds];
 dataDrivenTableView.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+[self.view addSubview:dataDrivenTableView];
 
 NSMutableArray *dataArray = [NSMutableArray array];
 for (UIColor *color in self.colorsArray)
