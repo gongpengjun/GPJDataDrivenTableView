@@ -1,7 +1,6 @@
 platform :ios, '8.0'
 
 target 'Example' do
-  #pod 'GPJDataDrivenTableView'
   pod 'GPJDataDrivenTableView', :path => '../../GPJDataDrivenTableView.podspec'
   pod 'randomColor'
   pod 'Masonry'
