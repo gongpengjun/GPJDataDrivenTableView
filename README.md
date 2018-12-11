@@ -8,14 +8,18 @@ __GPJDataDrivenTableView__ is a data-driven way to use UITableView.
 
 - the interface is intuitive, easy to use
   * just call `-[GPJDataDrivenTableView reloadDataArray:]`
-- two-way data mapping (Binding)
+- two-way data binding (mapping)
   * mapping from XXXData to XXXCell based on class name
   * send action from XXXCell to XXXData through `GPJBaseData.didSelectAction` block
 - decouple code by cell type, gain fine granularity code decouple
   * XXXData and XXXCell resides in XXXData.h/.m
   * YYYData and YYYCell resides in YYYData.h/.m
 
-`GPJDataDrivenTableView` is friendly to evolve with change of requirements.
+It is a great advantage to evolve with change of requirements, since add/modify/delete cell is independent:
+
+- addding a new kind of cell or a new cell instance will NOT affect others
+- modifing a kind of cell or a cell instance will NOT affect others
+- delteing a kind of cell or a cell instance will NOT affect others
 
 ## Installation
 
