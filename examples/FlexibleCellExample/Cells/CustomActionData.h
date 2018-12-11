@@ -3,7 +3,7 @@
 //  Example
 //
 
-#import <GPJDataDrivenTableView/GPJDataDrivenTableView.h>
+#import <GPJDataDrivenTableView/UITableView+GPJDataDriven.h>
 
 @interface CustomActionData : GPJBaseData
 - (CGFloat)cellHeight;

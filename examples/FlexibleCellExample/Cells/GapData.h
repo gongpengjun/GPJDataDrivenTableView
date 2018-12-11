@@ -3,7 +3,7 @@
 //  Example
 //
 
-#import <GPJDataDrivenTableView/GPJDataDrivenTableView.h>
+#import <GPJDataDrivenTableView/UITableView+GPJDataDriven.h>
 
 @interface GapData : GPJBaseData
 @property (nonatomic, assign) CGFloat height;

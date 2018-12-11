@@ -1,7 +1,7 @@
 #import "MainViewController.h"
 #import <Masonry/Masonry.h>
 #import <randomColor/UIColor+randomColor.h>
-#import <GPJDataDrivenTableView/GPJDataDrivenTableView.h>
+#import <GPJDataDrivenTableView/UITableView+GPJDataDriven.h>
 #import "ColorData.h"
 #import "LoadingData.h"
 #import "ActionData.h"
@@ -10,7 +10,7 @@
 
 @interface MainViewController ()
 @property (nonatomic, strong) UIBarButtonItem         *refreshButtonItem;
-@property (nonatomic, strong) GPJDataDrivenTableView  *dataDrivenTableView;
+@property (nonatomic, strong) UITableView             *dataDrivenTableView;
 @property (nonatomic, strong) NSArray                 *colorsArray;
 @end
 
@@ -37,8 +37,8 @@
     self.navigationItem.rightBarButtonItems = @[self.refreshButtonItem];
 
     // setup dataDrivenTableView
-    self.dataDrivenTableView = [[GPJDataDrivenTableView alloc] initWithFrame:self.view.bounds];
-    self.dataDrivenTableView.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.dataDrivenTableView = [[UITableView alloc] initWithFrame:self.view.bounds];
+    self.dataDrivenTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.dataDrivenTableView];
     
     [self.dataDrivenTableView mas_makeConstraints:^(MASConstraintMaker *make) {

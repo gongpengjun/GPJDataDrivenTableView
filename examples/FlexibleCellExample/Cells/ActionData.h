@@ -3,7 +3,7 @@
 //  Example
 //
 
-#import <GPJDataDrivenTableView/GPJDataDrivenTableView.h>
+#import <GPJDataDrivenTableView/UITableView+GPJDataDriven.h>
 
 @interface ActionData : GPJBaseData
 @property (nonatomic, copy) NSString *actionName;
