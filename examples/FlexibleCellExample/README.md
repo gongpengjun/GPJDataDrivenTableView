@@ -9,7 +9,34 @@ iOS Example App to demonstrate flexible various cells using GPJDataDrivenTableVi
 [![screenshot_flex_3_small](https://user-images.githubusercontent.com/278430/49798859-462f1f00-fd7e-11e8-9d04-b3b0cfa2723e.png)](https://user-images.githubusercontent.com/278430/49798861-46c7b580-fd7e-11e8-8b68-c09a9de9f114.png)
 [![screenshot_flex_4_small](https://user-images.githubusercontent.com/278430/49798862-46c7b580-fd7e-11e8-85d7-1c4eafab5984.png)](https://user-images.githubusercontent.com/278430/49798863-47604c00-fd7e-11e8-9247-fffe568c87c2.png)
 
-## Usage
+## Code Example
+
+```objectivec
+#import <GPJDataDrivenTableView/GPJDataDrivenTableView.h>
+
+GPJDataDrivenTableView *dataDrivenTableView = [[GPJDataDrivenTableView alloc] initWithFrame:self.view.bounds];
+dataDrivenTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+[self.view addSubview:dataDrivenTableView];
+
+NSMutableArray *dataArray = [NSMutableArray array];
+{
+	ActionData *actionData = [ActionData new];
+	actionData.didSelectAction = ^(id data) {
+	    [weakSelf actionCellReloadAction:data];
+	};
+	[dataArray addObject:actionData];
+}
+{
+	ColorData *data = [ColorData new];
+	data.didSelectAction = ^(id data) {
+	    [weakSelf colorCellAction:data];
+	};
+	[dataArray addObject:data];
+}
+[dataDrivenTableView reloadDataArray:dataArray];
+```
+
+## Example Usage
 
 ```
 $ git clone git@github.com:gongpengjun/GPJDataDrivenTableViewExample.git
