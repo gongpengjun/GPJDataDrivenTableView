@@ -5,7 +5,7 @@
 #import "LoadingData.h"
 #import "ColorData.h"
 
-@interface MainViewController () <UITableViewDataSource>
+@interface MainViewController () <UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) UIBarButtonItem *addBarButtonItem;
 @property (nonatomic, strong) UIBarButtonItem *editBarButtonItem;
 @property (nonatomic, strong) UIBarButtonItem *doneBarButtonItem;
@@ -41,7 +41,7 @@
     self.dataDrivenTableView = [[GPJDataDrivenTableView alloc] initWithFrame:self.view.bounds];
     self.dataDrivenTableView.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.dataDrivenTableView.dataSource = self;
-    //self.dataDrivenTableView.delegate = self;
+    self.dataDrivenTableView.delegate = self;
     [self.view addSubview:self.dataDrivenTableView];
     
     [self.dataDrivenTableView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -264,6 +264,18 @@
     }
     self.colorsArray = tempColorArray;
     [self modelDidLoad];
+}
+
+#pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView willBeginEditingRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    self.navigationItem.rightBarButtonItems = @[self.doneBarButtonItem];
+}
+
+- (void)tableView:(UITableView *)tableView didEndEditingRowAtIndexPath:(nullable NSIndexPath *)indexPath
+{
+    self.navigationItem.rightBarButtonItems = @[self.editBarButtonItem];
 }
 
 @end
