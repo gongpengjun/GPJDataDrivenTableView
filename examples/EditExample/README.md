@@ -9,7 +9,30 @@ iOS Example App to demonstrate edit cell using GPJDataDrivenTableView.
 [![screenshot_edit_3_small](https://user-images.githubusercontent.com/278430/49798848-43ccc500-fd7e-11e8-832b-bd17093dffb6.png)](https://user-images.githubusercontent.com/278430/49798849-43ccc500-fd7e-11e8-9f63-958e781977c5.png)
 [![screenshot_edit_4_small](https://user-images.githubusercontent.com/278430/49798850-44655b80-fd7e-11e8-84c7-cb1e659692f5.png)](https://user-images.githubusercontent.com/278430/49798851-44655b80-fd7e-11e8-851a-9631a2928f1e.png)
 
-## Usage
+## Code Example
+
+```objectivec
+#import <GPJDataDrivenTableView/UITableView+GPJDataDriven.h>
+
+UITableView *dataDrivenTableView = [[UITableView alloc] initWithFrame:self.view.bounds];
+dataDrivenTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+dataDrivenTableView.gpjDataSource = self;
+dataDrivenTableView.gpjDelegate = self;
+
+NSMutableArray *dataArray = [NSMutableArray array];
+for (UIColor *color in self.colorsArray)
+{
+	ColorData *data = [ColorData new];
+	data.bgColor = color;
+	data.didSelectAction = ^(id data) {
+	    [weakSelf colorCellAction:data];
+	};
+	[dataArray addObject:data];
+}
+[dataDrivenTableView reloadDataArray:dataArray];
+```
+
+## Example Usage
 
 ```
 $ git clone git@github.com:gongpengjun/GPJDataDrivenTableView.git
