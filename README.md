@@ -19,7 +19,9 @@ pod 'GPJDataDrivenTableView'
 
 ## Example
 
-[GPJDataDrivenTableViewExample](https://github.com/gongpengjun/GPJDataDrivenTableViewExample)
+- [Basic Usage Example](examples/BasicExample)
+- [Flexible Cells Example](examples/FlexibleCellExample)
+- [Edit Cell Example](examples/EditExample)
 
 ## Origin
 
