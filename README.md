@@ -17,6 +17,10 @@ pod 'GPJDataDrivenTableView'
 1. download the GPJDataDrivenTableView repository
 2. copy the GPJDataDrivenTableView sub-folder into your Xcode project
 
+## Requirements
+
+`GPJDataDrivenTableView` works on iOS 6+ and requires ARC to build.
+
 ## Usage
 
 ```objectivec
@@ -76,7 +80,7 @@ This index-driven way based on __indexPath__ results a lot of `if-else` code seg
 
 [![uitableview_indexdriven](https://user-images.githubusercontent.com/278430/49796885-dc604680-fd78-11e8-9e4f-90fbf842c680.png)](docs/UITableView_IndexDriven.png)
 
-The core role of data-driven way to use UITableView is GPJDataDrivenTableView class. GPJDataDrivenTableView contains UITableView instance and a dataArray, GPJDataDrivenTableView set itself as UITableView's dataSource and delegate, implement the protocol methods, and covert ___indexPath___ to ___data___ in dataArray. Finally we can render cell ui and respond to row selection based on ___data___. 
+The core role of data-driven way to use UITableView is GPJDataDrivenTableView class. GPJDataDrivenTableView is subclass of UITableView, it has a `dataArray` property, GPJDataDrivenTableView set itself as UITableView's dataSource and delegate, implement the protocol methods, and covert ___indexPath___ to ___data___ in dataArray. Finally we can render cell ui and respond to row selection based on ___data___. 
 
 [![uitableview_datadriven](https://user-images.githubusercontent.com/278430/49796884-dbc7b000-fd78-11e8-80da-604e2796673f.png)](docs/UITableView_DataDriven.png)
 
