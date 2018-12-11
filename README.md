@@ -17,6 +17,32 @@ pod 'GPJDataDrivenTableView'
 1. download the GPJDataDrivenTableView repository
 2. copy the GPJDataDrivenTableView sub-folder into your Xcode project
 
+## Usage
+
+```objectivec
+#import <GPJDataDrivenTableView/GPJDataDrivenTableView.h>
+
+GPJDataDrivenTableView *dataDrivenTableView = [[GPJDataDrivenTableView alloc] initWithFrame:self.view.bounds];
+dataDrivenTableView.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+
+NSMutableArray *dataArray = [NSMutableArray array];
+{
+	ActionData *actionData = [ActionData new];
+	actionData.didSelectAction = ^(id data) {
+	    [weakSelf actionCellReloadAction:data];
+	};
+	[dataArray addObject:actionData];
+}
+{
+	ColorData *data = [ColorData new];
+	data.didSelectAction = ^(id data) {
+	    [weakSelf colorCellAction:data];
+	};
+	[dataArray addObject:data];
+}
+[dataDrivenTableView reloadDataArray:dataArray];
+```
+
 ## Example
 
 - [Basic Usage Example](examples/BasicExample)
