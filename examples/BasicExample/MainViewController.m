@@ -45,7 +45,7 @@
 
     // setup dataDrivenTableView
     self.dataDrivenTableView = [[GPJDataDrivenTableView alloc] initWithFrame:self.view.bounds];
-    self.dataDrivenTableView.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.dataDrivenTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.dataDrivenTableView];
     
     [self.dataDrivenTableView mas_makeConstraints:^(MASConstraintMaker *make) {

@@ -39,9 +39,9 @@
     self.navigationItem.rightBarButtonItems = @[self.editBarButtonItem];
 
     self.dataDrivenTableView = [[GPJDataDrivenTableView alloc] initWithFrame:self.view.bounds];
-    self.dataDrivenTableView.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.dataDrivenTableView.dataSource = self;
-    self.dataDrivenTableView.delegate = self;
+    self.dataDrivenTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.dataDrivenTableView.gpjDataSource = self;
+    self.dataDrivenTableView.gpjDelegate = self;
     [self.view addSubview:self.dataDrivenTableView];
     
     [self.dataDrivenTableView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -96,13 +96,13 @@
 
 - (void)editButtonItemAction:(id)sender
 {
-    self.dataDrivenTableView.tableView.editing = YES;
+    self.dataDrivenTableView.editing = YES;
     self.navigationItem.rightBarButtonItems = @[self.doneBarButtonItem];
 }
 
 - (void)doneButtonItemAction:(id)sender
 {
-    self.dataDrivenTableView.tableView.editing = NO;
+    self.dataDrivenTableView.editing = NO;
     self.navigationItem.rightBarButtonItems = @[self.editBarButtonItem];
 }
 
@@ -129,7 +129,7 @@
 
     NSInteger index = [self.dataDrivenTableView.dataArray indexOfObject:data];
     NSIndexPath *lastIndexPath = [NSIndexPath indexPathForRow:index inSection:0];
-    [self.dataDrivenTableView.tableView scrollToRowAtIndexPath:lastIndexPath atScrollPosition:UITableViewScrollPositionNone animated:YES];
+    [self.dataDrivenTableView scrollToRowAtIndexPath:lastIndexPath atScrollPosition:UITableViewScrollPositionNone animated:YES];
 }
 
 - (void)colorCellAction:(id)data
