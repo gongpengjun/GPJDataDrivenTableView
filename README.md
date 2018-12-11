@@ -20,8 +20,11 @@ pod 'GPJDataDrivenTableView'
 ## Usage
 
 ```objectivec
+#import <GPJDataDrivenTableView/UITableView+GPJDataDriven.h>
+
 UITableView *dataDrivenTableView = [[UITableView alloc] initWithFrame:self.view.bounds];
 dataDrivenTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+
 NSMutableArray *dataArray = [NSMutableArray array];
 {
 	ActionData *actionData = [ActionData new];
