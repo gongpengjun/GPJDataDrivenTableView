@@ -1,0 +1,5 @@
+Example.xcodeproj/project.xcworkspace/xcuserdata
+Example.xcodeproj/xcuserdata
+Example.xcworkspace/*
+Pods/*
+Podfile.lock
