@@ -19,7 +19,7 @@ It is a great advantage to evolve with change of requirements, since add/modify/
 
 - addding a new kind of cell or a new cell instance will NOT affect others
 - modifing a kind of cell or a cell instance will NOT affect others
-- delteing a kind of cell or a cell instance will NOT affect others
+- deleting a kind of cell or a cell instance will NOT affect others
 
 ## Installation
 
