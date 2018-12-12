@@ -18,7 +18,7 @@
 
 @interface GPJDataDrivenTableView : UITableView <UITableViewDelegate, UITableViewDataSource>
 
-@property (nonatomic, strong) NSArray *dataArray;
+@property (nonatomic, copy) NSArray *dataArray;
 
 /* Initialize GPJDataDrivenTableView, do the following setup:
  * 1. call [super initWithFrame:style:] with UITableViewStylePlain
