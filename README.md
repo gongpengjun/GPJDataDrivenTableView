@@ -131,6 +131,6 @@ There are three classes: GPJDataDrivenTableView, GPJTableViewCell, and GPJTableV
 - GPJTableViewCell: subclass of UITableViewCell, implement cell UI
 - GPJTableViewData: subclass of NSObject, implement `-cellHeight` method to specify cell height.
 
-The code base is only about two hundreds, go ahead to have a look. [GPJDataDrivenTableView.m](https://github.com/gongpengjun/GPJDataDrivenTableView/tree/br_subclass_impl/GPJDataDrivenTableView/GPJDataDrivenTableView.m)
+The code base is only about two hundreds lines, go ahead to have a look. [GPJDataDrivenTableView.m](https://github.com/gongpengjun/GPJDataDrivenTableView/tree/br_subclass_impl/GPJDataDrivenTableView/GPJDataDrivenTableView.m)
 
 Hope you enjoy it.
