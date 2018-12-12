@@ -20,11 +20,11 @@ __GPJDataDrivenTableView__ has the following advantages:
   * YYYCell and YYYData resides in YYYData.h/.m
 - there is NOT IndexPath in business code, so it eliminates errors around index
 
-Then, we can add/modify/delete cell independently:
+Then, we can add/delete/modify cell independently:
 
 - addding a new kind of cell or a new cell instance will NOT affect others
-- modifing a kind of cell or a cell instance will NOT affect others
 - deleting a kind of cell or a cell instance will NOT affect others
+- modifing a kind of cell or a cell instance will NOT affect others
 
 Finally, our code can evolve with change of requirements harmoniously. 🎉🎉🎉Woohoo🎉🎉🎉
 
@@ -119,15 +119,18 @@ Using data-driven way, we don't need concern about ___indexPath___. it is error-
 
 After comparing the [composite](https://github.com/gongpengjun/GPJDataDrivenTableView/tree/br_composite_impl/GPJDataDrivenTableView), [subclass](https://github.com/gongpengjun/GPJDataDrivenTableView/tree/br_subclass_impl/GPJDataDrivenTableView), [category](https://github.com/gongpengjun/GPJDataDrivenTableView/tree/br_category_impl/GPJDataDrivenTableView) implementation, I choose the [subclass](https://github.com/gongpengjun/GPJDataDrivenTableView/tree/br_subclass_impl/GPJDataDrivenTableView) imeplementation.
 
-There are there classes: GPJDataDrivenTableView, GPJTableViewCell, and GPJTableViewData
+There are three classes: GPJDataDrivenTableView, GPJTableViewCell, and GPJTableViewData
 
 - GPJDataDrivenTableView: subclass of UITableView
   * it implements UITableViewDataSource and UITableViewDelegate
   * it has a `dataArray` property to hold instances of `GPJTableViewData`'s subclasses
   * it binds XXXCell on XXXData using name string substitution
   * it responds `tableView:didSelectRowAtIndexPath:` and call `GPJTableViewData.didSelectAction` block
-  * it hides `dataSource` / `delegate` and exposes `gpjDataSource` / `gpjDelegate`
+  * it hides `dataSource` / `delegate` to prevent error-usage
+  * it exposes `gpjDataSource` / `gpjDelegate` for extension and customization
 - GPJTableViewCell: subclass of UITableViewCell, implement cell UI
 - GPJTableViewData: subclass of NSObject, implement `-cellHeight` method to specify cell height.
+
+The code base is only about two hundreds, go ahead to have a look. [GPJDataDrivenTableView.m](https://github.com/gongpengjun/GPJDataDrivenTableView/tree/br_subclass_impl/GPJDataDrivenTableView/GPJDataDrivenTableView.m)
 
 Hope you enjoy it.
