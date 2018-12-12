@@ -136,12 +136,11 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *reuseIdentifier = [self reuseIdentifierForIndexPath:indexPath];
-    Class     cellClass       = [self cellClassForIndexPath:indexPath];
-    GPJTableViewCell *cell = [self dequeueReusableCellWithIdentifier:reuseIdentifier];
-    if (cell == nil) {
-        cell = [[cellClass alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
-    }
+    Class     cellClass  = [self cellClassForIndexPath:indexPath];
+    NSString *identifier = [self reuseIdentifierForIndexPath:indexPath];
+    [self registerClass:cellClass forCellReuseIdentifier:identifier];
+    // the dequeue method guarantees a cell is returned and resized properly, assuming identifier is registered
+    GPJTableViewCell *cell = [self dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
     cell.data = [self dataForIndexPath:indexPath];
     return cell;
 }

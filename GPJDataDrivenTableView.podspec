@@ -7,7 +7,7 @@ Pod::Spec.new do |s|
   s.license      = { :type => 'MIT', :file => 'LICENSE' }
   s.author       = { "gongpengjun" => "frank.gongpengjun@gmail.com" }
   s.social_media_url = "https://twitter.com/frank_gong"
-  s.platform     = :ios, '5.0' #minimum platform with ARC
+  s.platform     = :ios, '6.0' #minimum version with dequeueReusableCellWithIdentifier:forIndexPath: and ARC support
   s.source       = { :git => "https://github.com/gongpengjun/GPJDataDrivenTableView.git", :tag => "v#{s.version}" }
   s.source_files = 'GPJDataDrivenTableView/**/*.{h,m}'
   s.framework    = "UIKit"
