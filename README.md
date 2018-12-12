@@ -2,41 +2,31 @@
 
 ## Description
 
-__GPJDataDrivenTableView__ is a data-driven way to use UITableView.
+`GPJDataDrivenTableView` is a data-driven way to use UITableView.
 
-`GPJDataDrivenTableView` has the following benefits:
+__GPJDataDrivenTableView__ has the following features:
 
-- the interface is intuitive, easy to use
-  * just call `-[GPJDataDrivenTableView reloadDataArray:]`
 - two-way data binding (mapping)
-  * mapping from XXXData to XXXCell based on class name
-  * send action from XXXCell to XXXData through `GPJBaseData.didSelectAction` block
-- decouple code by cell type, gain fine granularity code decouple
-  * XXXData and XXXCell resides in XXXData.h/.m
-  * YYYData and YYYCell resides in YYYData.h/.m
+  * bind UI element XXXCell on XXXData based on their class name
+  * send action from XXXCell to XXXData through `GPJTableViewData.didSelectAction` block
+- the interface is intuitive, so it easy to use
+  * construct `dataArray` with various subclasses of `GPJTableViewData`
+  * feed the `dataArray` to `-[GPJDataDrivenTableView reloadDataArray:]`
 
-It is a great advantage to evolve with change of requirements, since add/modify/delete cell is independent:
+__GPJDataDrivenTableView__ has the following advantages:
+
+- decouple code by cell type, so we gain very fine granularity code decoupling
+  * XXXCell and XXXData resides in XXXData.h/.m
+  * YYYCell and YYYData resides in YYYData.h/.m
+- there is NOT IndexPath in business code, so it eliminates errors around index
+
+Then, we can add/modify/delete cell independently:
 
 - addding a new kind of cell or a new cell instance will NOT affect others
 - modifing a kind of cell or a cell instance will NOT affect others
 - deleting a kind of cell or a cell instance will NOT affect others
 
-## Installation
-
-### CocoaPods
-
-```ruby
-pod 'GPJDataDrivenTableView'
-```
-
-### Manual
-
-1. download the GPJDataDrivenTableView repository
-2. copy the GPJDataDrivenTableView sub-folder into your Xcode project
-
-## Requirements
-
-`GPJDataDrivenTableView` works on iOS 6+ and requires ARC to build.
+Finally, our code can evolve with change of requirements harmoniously. 🎉🎉🎉Woohoo🎉🎉🎉
 
 ## Usage
 
@@ -64,6 +54,24 @@ NSMutableArray *dataArray = [NSMutableArray array];
 }
 [dataDrivenTableView reloadDataArray:dataArray];
 ```
+
+## Requirements
+
+`GPJDataDrivenTableView` works on iOS 6+ and requires ARC to build.
+
+## Installation
+
+### CocoaPods
+
+```ruby
+pod 'GPJDataDrivenTableView'
+```
+
+### Manual
+
+1. download the GPJDataDrivenTableView repository
+2. copy the GPJDataDrivenTableView sub-folder into your Xcode project
+
 
 ## Example
 
@@ -97,9 +105,29 @@ This index-driven way based on __indexPath__ results a lot of `if-else` code seg
 
 [![uitableview_indexdriven](https://user-images.githubusercontent.com/278430/49796885-dc604680-fd78-11e8-9e4f-90fbf842c680.png)](docs/UITableView_IndexDriven.png)
 
-The core role of data-driven way to use UITableView is GPJDataDrivenTableView class. GPJDataDrivenTableView is subclass of UITableView, it has a `dataArray` property, GPJDataDrivenTableView set itself as UITableView's dataSource and delegate, implement the protocol methods, and mapping `indexPath` to `data` in its `dataArray` property. Finally we can get the cell ui and respond to row selection based on ___data___. 
+The new way is data-driven. GPJDataDrivenTableView set itself as UITableView's dataSource and delegate, and mapping ___indexPath___ to ___data___ in its `dataArray` properly and safely. we only need construct `dataArray` and call `reloadDataArray:`, that is it.
+
+- construct `dataArray` with various subclasses of `GPJTableViewData`
+- feed the `dataArray` to `-[GPJDataDrivenTableView reloadDataArray:]`
+
 
 [![uitableview_datadriven](https://user-images.githubusercontent.com/278430/49796884-dbc7b000-fd78-11e8-80da-604e2796673f.png)](docs/UITableView_DataDriven.png)
 
+Using data-driven way, we don't need concern about ___indexPath___. it is error-free, it is friendly to evolve with change of requirements.
 
-This data-driven way is simple, easy to implement each kind of data, cell, and select action separately.
+## Implementation Choices and Details
+
+After comparing the [composite](https://github.com/gongpengjun/GPJDataDrivenTableView/tree/br_composite_impl/GPJDataDrivenTableView), [subclass](https://github.com/gongpengjun/GPJDataDrivenTableView/tree/br_subclass_impl/GPJDataDrivenTableView), [category](https://github.com/gongpengjun/GPJDataDrivenTableView/tree/br_category_impl/GPJDataDrivenTableView) implementation, I choose the [subclass](https://github.com/gongpengjun/GPJDataDrivenTableView/tree/br_subclass_impl/GPJDataDrivenTableView) imeplementation.
+
+There are there classes: GPJDataDrivenTableView, GPJTableViewCell, and GPJTableViewData
+
+- GPJDataDrivenTableView: subclass of UITableView
+  * it implements UITableViewDataSource and UITableViewDelegate
+  * it has a `dataArray` property to hold instances of `GPJTableViewData`'s subclasses
+  * it binds XXXCell on XXXData using name string substitution
+  * it responds `tableView:didSelectRowAtIndexPath:` and call `GPJTableViewData.didSelectAction` block
+  * it hides `dataSource` / `delegate` and exposes `gpjDataSource` / `gpjDelegate`
+- GPJTableViewCell: subclass of UITableViewCell, implement cell UI
+- GPJTableViewData: subclass of NSObject, implement `-cellHeight` method to specify cell height.
+
+Hope you enjoy it.
