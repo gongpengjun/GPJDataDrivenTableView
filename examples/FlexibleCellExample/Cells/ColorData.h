@@ -5,10 +5,10 @@
 
 #import <GPJDataDrivenTableView/GPJDataDrivenTableView.h>
 
-@interface ColorData : GPJBaseData
+@interface ColorData : GPJTableViewData
 @property (nonatomic, strong) UIColor *bgColor;
 @end
 
-@interface ColorCell : GPJBaseCell
+@interface ColorCell : GPJTableViewCell
 @property (nonatomic, strong) UIView *colorView;
 @end

@@ -5,12 +5,12 @@
 
 #import <GPJDataDrivenTableView/GPJDataDrivenTableView.h>
 
-@interface GapData : GPJBaseData
+@interface GapData : GPJTableViewData
 @property (nonatomic, assign) CGFloat height;
 + (instancetype)gapDataWithHeight:(CGFloat)height;
 @end
 
-@interface GapCell : GPJBaseCell
+@interface GapCell : GPJTableViewCell
 
 @end
 

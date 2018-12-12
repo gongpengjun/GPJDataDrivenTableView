@@ -5,11 +5,11 @@
 
 #import <GPJDataDrivenTableView/GPJDataDrivenTableView.h>
 
-@interface ActionData : GPJBaseData
+@interface ActionData : GPJTableViewData
 @property (nonatomic, copy) NSString *actionName;
 - (CGFloat)cellHeight;
 @end
 
-@interface ActionCell : GPJBaseCell
+@interface ActionCell : GPJTableViewCell
 @property (nonatomic, strong) UILabel *actionLabel;
 @end

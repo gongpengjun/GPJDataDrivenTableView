@@ -9,7 +9,7 @@
 
 #define kDefaultCellHeight 44.0f
 
-@implementation GPJBaseData
+@implementation GPJTableViewData
 
 @synthesize didSelectAction;
 
@@ -20,11 +20,11 @@
 
 @end
 
-@interface GPJBaseCell ()
+@interface GPJTableViewCell ()
 + (NSString *)GPJReuseIdentifier; // cell reuse identifier
 @end
 
-@implementation GPJBaseCell
+@implementation GPJTableViewCell
 
 + (NSString *)GPJReuseIdentifier;
 {
@@ -101,7 +101,7 @@
 - (CGFloat)heightForIndexPath:(NSIndexPath *)indexPath
 {
     id data  = [self dataForIndexPath:indexPath];
-    if ([data isKindOfClass:[GPJBaseData class]]) {
+    if ([data isKindOfClass:[GPJTableViewData class]]) {
         return [data cellHeight];
     } else {
         return kDefaultCellHeight;
@@ -138,7 +138,7 @@
 {
     NSString *reuseIdentifier = [self reuseIdentifierForIndexPath:indexPath];
     Class     cellClass       = [self cellClassForIndexPath:indexPath];
-    GPJBaseCell *cell = [self dequeueReusableCellWithIdentifier:reuseIdentifier];
+    GPJTableViewCell *cell = [self dequeueReusableCellWithIdentifier:reuseIdentifier];
     if (cell == nil) {
         cell = [[cellClass alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
     }
@@ -160,9 +160,9 @@
     }
     
     id data = [self dataForIndexPath:indexPath];
-    if (![data isKindOfClass:[GPJBaseData class]])
+    if (![data isKindOfClass:[GPJTableViewData class]])
         return;
-    GPJBaseData *baseData = (GPJBaseData *)data;
+    GPJTableViewData *baseData = (GPJTableViewData *)data;
     if (baseData.didSelectAction) {
         baseData.didSelectAction(data);
     }

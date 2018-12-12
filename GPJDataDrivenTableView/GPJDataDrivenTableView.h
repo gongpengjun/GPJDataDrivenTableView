@@ -6,13 +6,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface GPJBaseData : NSObject
-@property (nonatomic, copy) void (^didSelectAction)(id data); // data is subclass of GPJBaseData
+@interface GPJTableViewData : NSObject
+@property (nonatomic, copy) void (^didSelectAction)(id data); // data is subclass of GPJTableViewData
 - (CGFloat)cellHeight;
 @end
 
-@interface GPJBaseCell : UITableViewCell
-@property (nonatomic, strong) id data; // data is subclass of GPJBaseData
+@interface GPJTableViewCell : UITableViewCell
+@property (nonatomic, strong) id data; // data is subclass of GPJTableViewData
 - (void)configCell;
 @end
 
