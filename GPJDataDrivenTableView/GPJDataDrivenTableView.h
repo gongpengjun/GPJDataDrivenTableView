@@ -26,6 +26,9 @@
  * 3. set `self` as `super.delegate`
  */
 - (instancetype)initWithFrame:(CGRect)frame NS_DESIGNATED_INITIALIZER;
+// DO ONT use the following initializers, since GPJDataDrivenTableView always use `UITableViewStylePlain`
+- (instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style NS_UNAVAILABLE;
+- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder NS_UNAVAILABLE;
 
 /* Reloads everything from scratch. Redisplays visible rows.
  * 1. self.dataArray = dataArray;
@@ -33,25 +36,19 @@
  */
 - (void)reloadDataArray:(NSArray *)dataArray;
 
-/* Use `dataArray` to get the data-driven-cell feature of GPJDataDrivenTableView
- * DO NOT assign `dataSource` or `delegate`, Use `gpjDataSource` and `gpjDelegate` instead
- * GPJDataDrivenTableView will assign `self` as `dataSource` and `delegate`
+/* GPJDataDrivenTableView assign `self` as `dataSource` and `delegate` to implement two-way data binding.
+ * Use `gpjDataSource` and `gpjDelegate` if you want customize the behaviour.
  */
-@property (nonatomic, weak, nullable) id <UITableViewDataSource> dataSource NS_UNAVAILABLE; // use gpjDataSource
-@property (nonatomic, weak, nullable) id <UITableViewDelegate> delegate NS_UNAVAILABLE; // use gpjDelegate
-
 @property (nonatomic, weak, nullable) id <UITableViewDataSource> gpjDataSource;
 @property (nonatomic, weak, nullable) id <UITableViewDelegate>   gpjDelegate;
 
-// DO ONT use the following initializers, since GPJDataDrivenTableView always use `UITableViewStylePlain`
-- (instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style NS_UNAVAILABLE;
-- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder NS_UNAVAILABLE;
+@property (nonatomic, weak, nullable) id <UITableViewDataSource> dataSource NS_UNAVAILABLE; // use gpjDataSource
+@property (nonatomic, weak, nullable) id <UITableViewDelegate> delegate NS_UNAVAILABLE; // use gpjDelegate
 
-@end
-
-@interface GPJDataDrivenTableView (DataCellMapping)
-- (id)dataForIndexPath:(NSIndexPath *)indexPath;
+// The following methods is for subclass or `gpjDataSource/gpjDelegate`
+- (id)dataForIndexPath:(NSIndexPath *)indexPath; // safe way to access `data` in `dataArray`
 - (Class)cellClassForIndexPath:(NSIndexPath *)indexPath;
 - (CGFloat)heightForIndexPath:(NSIndexPath *)indexPath;
-- (Class)cellClassForDataClass:(Class)dataClass;
+- (Class)cellClassForDataClass:(Class)dataClass; // Data -> Cell name mapping
+
 @end

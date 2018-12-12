@@ -168,11 +168,7 @@
     }
 }
 
-@end
-
-#pragma mark -
-
-@implementation GPJDataDrivenTableView (MessageForward)
+#pragma mark - DataSource/Delegate MessageForward
 
 - (void)setGpjDataSource:(id<UITableViewDataSource>)gpjDataSource
 {
