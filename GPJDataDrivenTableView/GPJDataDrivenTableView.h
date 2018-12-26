@@ -6,6 +6,8 @@
 
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface GPJTableViewData : NSObject
 @property (nonatomic, copy) void (^didSelectAction)(id data); // data is subclass of GPJTableViewData
 - (CGFloat)cellHeight;
@@ -52,3 +54,5 @@
 - (Class)cellClassForDataClass:(Class)dataClass; // Data -> Cell name mapping
 
 @end
+
+NS_ASSUME_NONNULL_END
