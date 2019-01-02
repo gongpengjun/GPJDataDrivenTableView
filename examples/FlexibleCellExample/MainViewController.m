@@ -2,10 +2,10 @@
 #import <Masonry/Masonry.h>
 #import <randomColor/UIColor+randomColor.h>
 #import <GPJDataDrivenTableView/GPJDataDrivenTableView.h>
+#import <GPJDataDrivenTableView/GPJGapData.h>
 #import "ColorData.h"
 #import "LoadingData.h"
 #import "ActionData.h"
-#import "GapData.h"
 #import "CustomActionData.h"
 
 @interface MainViewController ()
@@ -72,7 +72,7 @@
     
     __weak typeof(self) weakSelf = self;
 
-    [dataArray addObject:[GapData gapDataWithHeight:15.0f]];
+    [dataArray addObject:[GPJGapData gapDataWithHeight:15.0f]];
 
     { // Top Cell, Show "Reload"
         ActionData *actionData = [ActionData new];
@@ -83,7 +83,7 @@
         [dataArray addObject:actionData];
     }
 
-    [dataArray addObject:[GapData gapDataWithHeight:15.0f]];
+    [dataArray addObject:[GPJGapData gapDataWithHeight:15.0f]];
     
     { // Custom Action Cell, Show "Hello" and "World"
         CustomActionData *customActionData = [CustomActionData new];
@@ -98,7 +98,7 @@
         [dataArray addObject:customActionData];
     }
     
-    [dataArray addObject:[GapData gapDataWithHeight:15.0f]];
+    [dataArray addObject:[GPJGapData gapDataWithHeight:15.0f]];
 
     for (UIColor *color in self.colorsArray)
     { // Other Cells, show real model info: various color
@@ -109,7 +109,7 @@
         };
         [dataArray addObject:data];
 
-        [dataArray addObject:[GapData gapDataWithHeight:10.0f]];
+        //[dataArray addObject:[GPJGapData gapDataWithHeight:10.0f]];
     }
 
     [self.dataDrivenTableView reloadDataArray:dataArray];

@@ -13,7 +13,6 @@
 		C41F5A1C1F735F5F00B06FC8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C41F5A191F728DDD00B06FC8 /* Images.xcassets */; };
 		C41F5A1D1F735F5F00B06FC8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C41F5A1B1F728DDD00B06FC8 /* LaunchScreen.storyboard */; };
 		C45899B421B652BD00C09C16 /* CustomActionData.m in Sources */ = {isa = PBXBuildFile; fileRef = C45899B321B652BD00C09C16 /* CustomActionData.m */; };
-		C499825921B135F4003977C9 /* GapData.m in Sources */ = {isa = PBXBuildFile; fileRef = C499825821B135F4003977C9 /* GapData.m */; };
 		C499825C21B13723003977C9 /* ColorData.m in Sources */ = {isa = PBXBuildFile; fileRef = C499825B21B13723003977C9 /* ColorData.m */; };
 		C4E6B61D21B4DCC900E52F61 /* LoadingData.m in Sources */ = {isa = PBXBuildFile; fileRef = C4E6B61C21B4DCC900E52F61 /* LoadingData.m */; };
 		C4E6B62021B4E47A00E52F61 /* ActionData.m in Sources */ = {isa = PBXBuildFile; fileRef = C4E6B61F21B4E47A00E52F61 /* ActionData.m */; };
@@ -33,8 +32,6 @@
 		C41F5A1B1F728DDD00B06FC8 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C45899B221B652BD00C09C16 /* CustomActionData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomActionData.h; sourceTree = "<group>"; };
 		C45899B321B652BD00C09C16 /* CustomActionData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomActionData.m; sourceTree = "<group>"; };
-		C499825721B135F4003977C9 /* GapData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GapData.h; sourceTree = "<group>"; };
-		C499825821B135F4003977C9 /* GapData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GapData.m; sourceTree = "<group>"; };
 		C499825A21B13723003977C9 /* ColorData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ColorData.h; sourceTree = "<group>"; };
 		C499825B21B13723003977C9 /* ColorData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ColorData.m; sourceTree = "<group>"; };
 		C4E6B61B21B4DCC900E52F61 /* LoadingData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoadingData.h; sourceTree = "<group>"; };
@@ -118,8 +115,6 @@
 				C4E6B61C21B4DCC900E52F61 /* LoadingData.m */,
 				C499825A21B13723003977C9 /* ColorData.h */,
 				C499825B21B13723003977C9 /* ColorData.m */,
-				C499825721B135F4003977C9 /* GapData.h */,
-				C499825821B135F4003977C9 /* GapData.m */,
 				C4E6B61E21B4E47A00E52F61 /* ActionData.h */,
 				C4E6B61F21B4E47A00E52F61 /* ActionData.m */,
 				C45899B221B652BD00C09C16 /* CustomActionData.h */,
@@ -265,7 +260,6 @@
 				C45899B421B652BD00C09C16 /* CustomActionData.m in Sources */,
 				C4F5D9AB1F6D7E83007306F1 /* MainViewController.m in Sources */,
 				C4F5D9A31F6D633A007306F1 /* main.m in Sources */,
-				C499825921B135F4003977C9 /* GapData.m in Sources */,
 				C4E6B61D21B4DCC900E52F61 /* LoadingData.m in Sources */,
 				C499825C21B13723003977C9 /* ColorData.m in Sources */,
 				C4E6B62021B4E47A00E52F61 /* ActionData.m in Sources */,
