@@ -3,12 +3,12 @@
 //  Example
 //
 
-#import <GPJDataDrivenTableView/GPJDataDrivenTableView.h>
+#import <GPJDataDrivenTableView/GPJRoundCornerSeparatorData.h>
 
-@interface ColorData : GPJTableViewData
+@interface ColorData : GPJRoundCornerSeparatorData
 @property (nonatomic, strong) UIColor *bgColor;
 @end
 
-@interface ColorCell : GPJTableViewCell
+@interface ColorCell : GPJRoundCornerSeparatorCell
 @property (nonatomic, strong) UIView *colorView;
 @end

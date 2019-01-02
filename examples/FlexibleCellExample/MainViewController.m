@@ -100,13 +100,28 @@
     
     [dataArray addObject:[GPJGapData gapDataWithHeight:15.0f]];
 
-    for (UIColor *color in self.colorsArray)
+    for (NSUInteger i = 0; i < self.colorsArray.count; i++)
     { // Other Cells, show real model info: various color
+        UIColor *color = self.colorsArray[i];
         ColorData *data = [ColorData new];
         data.bgColor = color;
         data.didSelectAction = ^(id data) {
             [weakSelf colorCellAction:data];
         };
+        data.backgroundViewInset = UIEdgeInsetsMake(0, 10, 0, 10);
+        data.separatorPosition = GPJCellSeparatorPositionBottom;
+        data.separatorInset = UIEdgeInsetsMake(0, 10.0, 0, 10.0);
+        data.separatorColor = [UIColor colorWithRed:0xF0/255.0f green:0xF0/255.0f blue:0xF0/255.0f alpha:1.0];
+        if (i == 0) {
+            data.backgroundViewCornerRadius = 10.0f;
+            data.backgroundViewCorners = UIRectCornerTopLeft|UIRectCornerTopRight;
+        } else if ( i == self.colorsArray.count - 1) {
+            data.backgroundViewCornerRadius = 10.0f;
+            data.backgroundViewCorners = UIRectCornerBottomLeft|UIRectCornerBottomRight;
+            data.separatorPosition = GPJCellSeparatorPositionNone;
+        } else {
+            data.backgroundViewCorners = 0;
+        }
         [dataArray addObject:data];
 
         //[dataArray addObject:[GPJGapData gapDataWithHeight:10.0f]];
