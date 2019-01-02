@@ -10,6 +10,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface GPJTableViewData : NSObject
 @property (nonatomic, copy) void (^didSelectAction)(id data); // data is subclass of GPJTableViewData
+- (CGFloat)cellPreferredMaxWidth; // Support for cell width autofit, If nonzero, this is used when determining tableView's content width
 - (CGFloat)cellHeight;
 @end
 
@@ -46,6 +47,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, weak, nullable) id <UITableViewDataSource> dataSource NS_UNAVAILABLE; // use gpjDataSource
 @property (nonatomic, weak, nullable) id <UITableViewDelegate> delegate NS_UNAVAILABLE; // use gpjDelegate
+
+- (CGFloat)contentPreferredMaxWidth;
+- (CGFloat)contentHeight;
 
 // The following methods is for subclass or `gpjDataSource/gpjDelegate`
 - (id)dataForIndexPath:(NSIndexPath *)indexPath; // safe way to access `data` in `dataArray`

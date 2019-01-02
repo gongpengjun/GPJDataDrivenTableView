@@ -13,6 +13,11 @@
 
 @synthesize didSelectAction;
 
+- (CGFloat)cellPreferredMaxWidth;
+{
+    return (CGFloat)0.0;
+}
+
 - (CGFloat)cellHeight;
 {
     return kDefaultCellHeight;
@@ -64,6 +69,27 @@
 {
     self.dataArray = dataArray;
     [super reloadData];
+}
+
+#pragma mark - TableView Content Size
+
+- (CGFloat)contentPreferredMaxWidth
+{
+    CGFloat preferredMaxWidth = 0.0;
+    for (GPJTableViewData *data in self.dataArray) {
+        CGFloat cellMaxWidth = [data cellPreferredMaxWidth];
+        preferredMaxWidth = (CGFloat)fmax(preferredMaxWidth, cellMaxWidth);
+    }
+    return preferredMaxWidth;
+}
+
+- (CGFloat)contentHeight
+{
+    CGFloat totalHeight = 0.0;
+    for (GPJTableViewData *data in self.dataArray) {
+        totalHeight += [data cellHeight];
+    }
+    return totalHeight;
 }
 
 #pragma mark - Data to Cell Mapping
