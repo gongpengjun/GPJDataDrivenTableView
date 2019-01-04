@@ -13,14 +13,14 @@
 
 @synthesize didSelectAction;
 
-- (CGFloat)cellPreferredMaxWidth;
+- (instancetype)init
 {
-    return (CGFloat)0.0;
-}
-
-- (CGFloat)cellHeight;
-{
-    return kDefaultCellHeight;
+    self = [super init];
+    if (self) {
+        self.cellHeight = (CGFloat)kDefaultCellHeight;
+        self.cellPreferredMaxWidth = (CGFloat)0.0;
+    }
+    return self;
 }
 
 @end
@@ -130,7 +130,7 @@
     if ([data isKindOfClass:[GPJTableViewData class]]) {
         return [data cellHeight];
     } else {
-        return kDefaultCellHeight;
+        return (CGFloat)kDefaultCellHeight;
     }
 }
 

@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "GPJDataDrivenTableView"
-  s.version      = "0.6.1"
+  s.version      = "0.6.2"
   s.summary      = "A data-driven way to use UITableView."
   s.description  = "The data-drive way is simple, steady, extendable, It is friendly to evolve with change of requirements."
   s.homepage     = "https://github.com/gongpengjun/GPJDataDrivenTableView"

@@ -9,9 +9,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface GPJTableViewData : NSObject
+@property (nonatomic, assign) CGFloat cellHeight;
+@property (nonatomic, assign) CGFloat cellPreferredMaxWidth; // Support for cell width autofit, If nonzero, this is used when determining tableView's content width
 @property (nonatomic, copy) void (^didSelectAction)(id data); // data is subclass of GPJTableViewData
-- (CGFloat)cellPreferredMaxWidth; // Support for cell width autofit, If nonzero, this is used when determining tableView's content width
-- (CGFloat)cellHeight;
 @end
 
 @interface GPJTableViewCell : UITableViewCell
