@@ -30,8 +30,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (instancetype)initWithFrame:(CGRect)frame NS_DESIGNATED_INITIALIZER;
 // DO ONT use the following initializers, since GPJDataDrivenTableView always use `UITableViewStylePlain`
-- (instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style NS_UNAVAILABLE;
-- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder NS_UNAVAILABLE;
+- (instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style __attribute__((unavailable("use 'initWithFrame:' instead")));
+- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder __attribute__((unavailable("use 'initWithFrame:' instead")));
 
 /* Reloads everything from scratch. Redisplays visible rows.
  * 1. self.dataArray = dataArray;
@@ -45,8 +45,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak, nullable) id <UITableViewDataSource> gpjDataSource;
 @property (nonatomic, weak, nullable) id <UITableViewDelegate>   gpjDelegate;
 
-@property (nonatomic, weak, nullable) id <UITableViewDataSource> dataSource NS_UNAVAILABLE; // use gpjDataSource
-@property (nonatomic, weak, nullable) id <UITableViewDelegate> delegate NS_UNAVAILABLE; // use gpjDelegate
+@property (nonatomic, weak, nullable) id <UITableViewDataSource> dataSource __attribute__((unavailable("use 'gpjDataSource' instead")));
+@property (nonatomic, weak, nullable) id <UITableViewDelegate> delegate __attribute__((unavailable("use 'gpjDelegate' instead")));
 
 - (CGFloat)contentPreferredMaxWidth;
 - (CGFloat)contentHeight;
